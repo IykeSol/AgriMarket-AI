@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriMarket Intelligence</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"></div>
+                <h2>AgriMarket.AI</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-tab="chat">
+                    <span>Market Chat</span>
+                </button>
+                <button class="nav-item" data-tab="form">
+                    <span>Advanced Form</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1>Market Intelligence Dashboard</h1>
+            </header>
+
+            <div class="tab-content active" id="chat-tab">
+                <div class="chat-container">
+                    <div class="chat-history" id="chat-history">
+                        <div class="message system">
+                            <div class="message-bubble">
+                                Welcome to AgriMarket AI. Ask me about future or current prices for Rice, Tomato, Maize, Yam, or Groundnut Oil in any location.
+                                <br><br>
+                                Example: <em>"Predict the price of a 50kg bag of Rice in Lagos by December assuming fuel hits 1500 and the dollar is 1800."</em>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <form id="chat-form">
+                            <input type="text" id="chat-input" placeholder="Ask about market predictions..." autocomplete="off">
+                            <button type="submit" id="chat-submit-btn">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="form-tab">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h2>Manual Price Modeling</h2>
+                        <p>Adjust economic and environmental variables manually.</p>
+                    </div>
+                    <form id="prediction-form" class="saas-form">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="item">Commodity</label>
+                                <select id="item" required>
+                                    <option value="Rice">Rice</option>
+                                    <option value="Groundnut Oil">Groundnut Oil</option>
+                                    <option value="Tomato">Tomato</option>
+                                    <option value="Maize">Maize</option>
+                                    <option value="Yam">Yam</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="unit">Unit Measure</label>
+                                <select id="unit" required>
+                                    <option value="50kg Bag">50kg Bag</option>
+                                    <option value="25kg Bag">25kg Bag</option>
+                                    <option value="25 Litres">25 Litres</option>
+                                    <option value="5 Litres">5 Litres</option>
+                                    <option value="Big Basket">Big Basket</option>
+                                    <option value="Small Basket">Small Basket</option>
+                                    <option value="100 Tubers">100 Tubers</option>
+                                    <option value="Single Tuber">Single Tuber</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="location">Location (City)</label>
+                                <input type="text" id="location" value="Lagos" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="year">Target Year (2020 - 2026+)</label>
+                                <input type="number" id="year" min="2020" max="2030" value="2026" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="month">Target Month (1-12)</label>
+                                <input type="number" id="month" min="1" max="12" value="6" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="usd_rate">USD/NGN Exchange Rate</label>
+                                <input type="number" id="usd_rate" min="500" value="1500" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="fuel">Fuel Price (NGN/L)</label>
+                                <input type="number" id="fuel" min="100" value="850" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="fertilizer">Fertilizer (NGN/50kg)</label>
+                                <input type="number" id="fertilizer" min="5000" value="22000" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="demand">Market Demand</label>
+                                <select id="demand" required>
+                                    <option value="Low">Low</option>
+                                    <option value="Medium" selected>Medium</option>
+                                    <option value="High">High</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="primary-btn" id="form-submit-btn">Run Model</button>
+                    </form>
+
+                    <div class="form-result hidden" id="form-result">
+                        <div class="result-card">
+                            <h3>Projected Price</h3>
+                            <div class="price">₦<span id="form-price-val">0.00</span></div>
+                            <div class="weather-meta" id="form-weather-meta"></div>
+                            <div class="analysis-summary hidden" id="form-analysis-summary"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
